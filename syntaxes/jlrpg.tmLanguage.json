@@ -1,0 +1,189 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "JLRPG",
+  "patterns": [
+    {
+      "include": "#section"
+    },
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#codeblock"
+    },
+    {
+      "include": "#tags"
+    },
+    {
+      "include": "#actionblock"
+    },
+    {
+      "include": "#productions"
+    },
+    {
+      "include": "#alias"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "source.julia"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "name": "comment.line.jlrpg",
+      "match": "#=[^\n]*=#"
+    },
+    "section": {
+      "name": "variable.language.jlrpg",
+      "match": "^%%\n?$"
+    },
+    "codeblock": {
+      "begin": "%{",
+      "beginCaptures": {
+        "0": {
+          "name": "constant.language.jlrpg"
+        }
+      },
+      "end": "%}",
+      "endCaptures": {
+        "0": {
+          "name": "constant.language.jlrpg"
+        }
+      },
+      "patterns": [
+        {
+          "include": "source.julia"
+        },
+        {
+          "include": "#comments"
+        }
+      ]
+    },
+    "tags": {
+      "patterns": [
+        {
+          "name": "keyword.other.jlrpg",
+          "match": "%option[ \t]+(\\w+)",
+          "captures": {
+            "1": {
+              "name": "constant.language.jlrpg"
+            }
+          }
+        },
+        {
+          "name": "keyword.other.jlrpg",
+          "match": "%token[ \t]+(\\w+)",
+          "captures": {
+            "1": {
+              "name": "constant.language.jlrpg"
+            }
+          }
+        },
+        {
+          "name": "keyword.other.jlrpg",
+          "match": "%type[ \t]+(<)((?:\\w|\\{|\\})+)(>)[ \t]+(\\w+)",
+          "captures": {
+            "1": {
+              "name": "constant.language.jlrpg"
+            },
+            "2": {
+              "name": "support.type.julia",
+              "patterns": [{ "include": "source.julia" }]
+            },
+            "3": {
+              "name": "constant.language.jlrpg"
+            },
+            "4": {
+              "name": "variable.parameter.jlrpg"
+            }
+          }
+        },
+        {
+          "name": "keyword.other.jlrpg",
+          "match": "%start[ \t]+(\\w+)",
+          "captures": {
+            "1": {
+              "name": "variable.parameter.jlrpg"
+            }
+          }
+        }
+      ]
+    },
+    "actionblock": {
+      "begin": ":{",
+      "beginCaptures": {
+        "0": {
+          "name": "constant.language.jlrpg"
+        }
+      },
+      "end": "}:",
+      "endCaptures": {
+        "0": {
+          "name": "constant.language.jlrpg"
+        }
+      },
+      "patterns": [
+        {
+          "include": "source.julia"
+        }
+      ]
+    },
+    "productions": {
+      "patterns": [
+        {
+          "match": "(\\w+)\\s+(->)\\s+([^:{}\n]+)",
+          "captures": {
+            "1": {
+              "name": "support.class.jlrpg"
+            },
+            "2": {
+              "name": "keyword.operator.jlrpg"
+            },
+            "3": {
+              "name": "variable.parameter.jlrpg",
+              "patterns": [{ "include": "#strings" }]
+            }
+          }
+        },
+        {
+          "match": "(\\|)\\s+([^:{}\n]+)",
+          "captures": {
+            "1": {
+              "name": "keyword.operator.jlrpg"
+            },
+            "2": {
+              "name": "variable.parameter.jlrpg",
+              "patterns": [{ "include": "#strings" }]
+            }
+          }
+        }
+      ]
+    },
+    "alias": {
+      "patterns": [
+        {
+          "name": "variable.other.jlrpg",
+          "match": "\\{[A-Z0-9_-]+\\}"
+        },
+        {
+          "name": "variable.other.jlrpg",
+          "match": "[A-Z0-9_-]+\\s+"
+        }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.double.jlrpg",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.jlrpg",
+          "match": "\\\\."
+        }
+      ]
+    }
+  },
+  "scopeName": "source.jlrpg"
+}

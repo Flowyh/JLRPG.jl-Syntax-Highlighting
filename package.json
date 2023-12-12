@@ -1,0 +1,35 @@
+{
+  "name": "jlrpg-jl-syntax-highlighting",
+  "displayName": "JLRPG.jl Syntax Highlighting",
+  "description": "Syntax highlighting for JLRPG.jl definition files",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "grammars": [
+      {
+        "language": "jlrpg",
+        "scopeName": "source.jlrpg",
+        "path": "./syntaxes/jlrpg.tmLanguage.json"
+      }
+    ],
+    "languages": [
+      {
+        "id": "jlrpg",
+        "aliases": [
+          "JLRPG",
+          "jlrpg"
+        ],
+        "extensions": [
+          ".jpar",
+          ".jlex"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ]
+  }
+}
